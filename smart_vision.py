@@ -7,15 +7,15 @@ import threading
 import winsound
 from collections import deque
 
-# ─── Project base directory and save path ─────────────────────────────
+# ─── project base directory and save path ─────────────────────────────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SAVE_DIR = os.path.join(BASE_DIR, "recordings")
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-# ─── Icon file (relative to script) ───────────────────────────────────
+# ─── icon file ───────────────────────────────────
 ICON_PATH = os.path.join(BASE_DIR, "pi.ico")
 
-# --- Take Photo ---
+# --- take Photo ---
 def take_photo():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -40,7 +40,7 @@ def take_photo():
     cap.release()
     cv2.destroyAllWindows()
 
-# --- Record Standard Video (10s) ---
+# --- record standard video (10s) ---
 def record_video():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -66,7 +66,7 @@ def record_video():
     cv2.destroyAllWindows()
     messagebox.showinfo("Saved", f"Video saved to:\n{fname}")
 
-# --- Live CCTV + Motion Detection (always highlight) ---
+# --- Live CCTV + motion detection ---
 def start_cctv():
     def detect_and_record():
         cap = cv2.VideoCapture(0)
@@ -143,10 +143,10 @@ FG_COLOR = "#ffffff"
 BUTTON_BG = "#caa169"
 BUTTON_FG = "#000000"
 
-# Title Label
+# title label
 tk.Label(root, text="Smart Vision Toolkit", font=FONT_TITLE, fg=FG_COLOR, bg="#003d3b").pack(pady=15)
 
-# Buttons
+# buttons
 for txt, cmd in [
     ("📸 Take Photo", take_photo),
     ("🎥 Record Video", record_video),
